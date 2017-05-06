@@ -1,0 +1,47 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        <h3 class='panel-title'><i class='{{icon}}'></i> Pick History for {{target_user.user_name}}</h3>
+    </div>
+    <div class='panel-body'>
+        {% if target_player_pick_history is empty %}
+            <div class="row">
+                <div class="col-md-12">
+                    There is no data to show at this time. Here you can see the pick history of the user
+                </div>
+            </div>
+        {% else %}                                        
+            <div class="row">                
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="">Week/Player Name</th>
+                                    <th class="">???</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% set break = false %}
+                                {% for player_pick_history in target_player_pick_history if not break %}
+                                   <tr>
+                                        {% if row_num == player_pick_history.week_id %}
+                                            <td>{{player_pick_history.week_id}}</td>
+                                            <td>{{player_pick_history.full_name}}</td>    
+                                            {% player_pick_history.week_id = player_pick_history.week_id + 1 %}
+                                        {% else %}
+                                            {% set break = true %}
+                                        {% endif %}
+                                        
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+    
+
+            
